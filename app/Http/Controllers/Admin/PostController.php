@@ -59,6 +59,7 @@ class PostController extends Controller
             'content'=>'required|string',
             'published_at'=>'nullable|before_or_equal:today',
             'category_id'=>'nullable|exists:categories,id',
+            'tags'=>'exixts:tags,id',//deve esistere nella tabella tags, colonna id
         ]);
 
         $data = $request->all();
@@ -130,6 +131,14 @@ class PostController extends Controller
             $data['slug'] = $slug;
         }
 
+        //controllo per avere un array from checkbox
+        if (array_key_exists('tag', $data)) {
+            $post->tags()->sync($data['tags']); //ci sono values in checkbox
+        } else {
+            $post->tags()->sync([]); //non ci sono
+            // $post->tags()->detach();
+        }
+        
 
         //Aggiornare i dati
         $post->update($data);
