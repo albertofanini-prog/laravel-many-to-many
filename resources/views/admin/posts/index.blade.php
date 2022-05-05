@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a class="btn btn-primary" href="{{route('admin.posts.create')}}">Nuovo post</a>
+        <a class="btn btn-primary mb-3" href="{{route('admin.posts.create')}}">Nuovo post</a>
     </div>
     <div class="container">
         <table class="table">
@@ -27,7 +27,7 @@
                         <td>{{$post->published_at}}</td>
                         <td>{{$post->created_at}}</td>
                         <td>
-                            <a class="btn btn-small btn-warning" href="{{route('admin.posts.edit', $post)}}">Modifica</a>
+                            <a class="btn btn-small btn-warning mb-1" href="{{route('admin.posts.edit', $post)}}">Modifica</a>
                             <form action="{{ route('admin.posts.destroy', $post)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
