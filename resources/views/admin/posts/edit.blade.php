@@ -23,6 +23,7 @@
             @csrf
             @method('PUT')
   
+            {{-- title --}}
             <div class="form-group">
                 <label for="title">Titolo</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') ?: $post->title }}" aria-describedby="emailHelp">
@@ -33,6 +34,7 @@
                 @enderror
             </div>
 
+            {{-- content --}}
             <div class="form-group">
                 <label for="content">Contenuto del post</label>
                 <textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="3">{{ old('content') ?: $post->content }}</textarea>
@@ -43,6 +45,7 @@
                 @enderror
             </div>
 
+            {{-- category --}}
             <div class="form-group">
                 <label for="category_id">Categoria</label>
                 <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
@@ -57,7 +60,19 @@
                     </div>
                 @enderror
             </div>
+            
+            {{-- tags --}}
+            <label for="tags">Tag</label>
+            <div class="d-flex" style="gap: 1rem;">
+                @foreach ($tags as $tag)
+                    <div class="form-group form-check">
+                        <input type="checkbox" {{$post->tags->contains($tag) ? 'checked' : ''}} class="form-check-input" value="{{$tag->id}}" name="tag" id="tags--{{$tag->id}}">
+                        <label class="form-check-label" for="tags--{{$tag->id}}">{{$tag->name}}</label>
+                    </div>
+                @endforeach
+            </div>
 
+            {{-- date --}}
             <div class="form-group">
                 <label for="title">Data di pubblicazione</label>
                 <input type="date" class="form-control @error('published_at') is-invalid @enderror" id="published_at" name="published_at" value="{{ old('published_at') ?: Str::substr($post->published_at,  0, 10) }}" aria-describedby="emailHelp">
