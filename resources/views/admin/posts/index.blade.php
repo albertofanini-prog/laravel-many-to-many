@@ -11,6 +11,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Slug</th>
+                <th scope="col">Tag</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Data di pubblicazione</th>
                 <th scope="col">Data di creazione</th>
@@ -26,6 +27,11 @@
                         <td>{{$post->category ? $post->category->name : 'Nessuna categoria'}}</td>
                         <td>{{$post->published_at}}</td>
                         <td>{{$post->created_at}}</td>
+                        <td>
+                            @foreach ($post->tags as $tag)
+                                <span style="display: inline-block" class="bade badge-pill badge-info mb-1">{{$tag->name}}</span>
+                            @endforeach
+                        </td>
                         <td>
                             <a class="btn btn-small btn-warning mb-1" href="{{route('admin.posts.edit', $post)}}">Modifica</a>
                             <form action="{{ route('admin.posts.destroy', $post)}}" method="POST">

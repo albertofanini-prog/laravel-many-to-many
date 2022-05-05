@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            //creare tag
             TagSeeder::class,
+            //creare categorie
             CategorySeeder::class,
             PostSeeder::class
         ]);
