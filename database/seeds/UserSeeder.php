@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         //creazione admin user per evitare registrazione ogni volta
         User::create([
-            'name' => 'Alberto',
+            'name' => 'Alb',
             'email' => 'alb@tipo.com',
             'password' => Hash::make('pizza123'),
         ]);
