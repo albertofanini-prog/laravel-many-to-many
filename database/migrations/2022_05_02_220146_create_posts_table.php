@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('cover')->nullable();
             $table->dateTime('published_at')->nullable();
             $table->timestamps();
+            $table -> softDeletes();
         });
     }
 

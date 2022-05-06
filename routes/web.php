@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\PostController;
 
 /*
@@ -34,6 +35,8 @@ Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->
     //Resource posts
     //Ecc
     Route::resource('posts', 'PostController');
+    
+    Route::delete('admin/posts/{post}/force', 'PostController@forceDestroy')->name('post.destroy.force');
 
 });
 

@@ -79,16 +79,16 @@ class PostController extends Controller
         // dd($request->all());
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Post $post
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Post $post)
+    {
+        return view('admin.posts.show', compact('post'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -149,12 +149,26 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        // $post->delete();
+
+        // return redirect()->route('admin.posts.index');
+
+        if($post->trashed()){
+            $post->forceDelete();
+        } else{
+            $post->delete();
+        }
+
+        return redirect()->route('admin.posts.index');
+    }
+
+    public function forceDestroy(Post $post){
+        $post->forceDelete();
 
         return redirect()->route('admin.posts.index');
     }
